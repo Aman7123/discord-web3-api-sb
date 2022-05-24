@@ -1,15 +1,16 @@
 [![SOFT](https://github.com/Aman7123/discord-web3-api-sb/actions/workflows/SOFT.yml/badge.svg)](https://github.com/Aman7123/discord-web3-api-sb/actions/workflows/SOFT.yml) [![RELEASE](https://github.com/Aman7123/discord-web3-api-sb/actions/workflows/RELEASE.yml/badge.svg)](https://github.com/Aman7123/discord-web3-api-sb/actions/workflows/RELEASE.yml)
 
 ### discord-web3-api-sb
-* Version: 1.0.2
+* Version: 1.0.3
 * Most up to date implementation will be found in branch `develop`.
 * Creator: Aaron Renner
 * This API project was created in Spring-Boot
 
 ### Introduction
-This RESTful API provides database resources. This API is fully dynamic meaning it was ideally designed to not need any secific MySQL formatting, just plug-and-play!
+This RESTful API provides database resources. Allows a user endpoint for storing a Discord User ID, username and image. A sub resource for the user which I call Wallet is for storing BTC, ETH, SOL or DOGE wallets for a user.
 
 ### Documentation
+* For endpoint examples see postman collection below
 * Postman collection and environment variables in `src/test/resources/postman`
 
 ### Getting Started
@@ -24,11 +25,14 @@ The profiles active environment variable is for selecting active config values. 
 Note: IDE specific development
 * Eclipse - When modifying this API in Eclipse the VM arguments added to the runtime configuration will be prefixed with `-D`.
   * Example: `-Dspring.profiles.active=dev`
+  * Example: `-Dspring.datasource.url=jdbc:mysql://example.com:3306/databaseName?createDatabaseIfNotExist=true`
+  * Example: `-Dspring.datasource.username=admin`
+  * Example: `-Dspring.datasource.password=password`
 
 **Running on the Command Line**
 The command arguments in a terminal also follow the prefix `-D` rule.
 ```
-mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=dev"
+mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=dev --spring.datasource.username=admin"
 ```
 
 ### Docker & Compose & Maven
@@ -41,4 +45,4 @@ an example for using Github workflows.
 
 ### Contact
 
-* Aaron Renner (admin@aaronrenner.com)
+* Aaron Renner (admin@arenner.io)
