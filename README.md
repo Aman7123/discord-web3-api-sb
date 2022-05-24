@@ -1,5 +1,7 @@
+[![SOFT](https://github.com/Aman7123/discord-web3-api-sb/actions/workflows/SOFT.yml/badge.svg)](https://github.com/Aman7123/discord-web3-api-sb/actions/workflows/SOFT.yml) [![RELEASE](https://github.com/Aman7123/discord-web3-api-sb/actions/workflows/RELEASE.yml/badge.svg)](https://github.com/Aman7123/discord-web3-api-sb/actions/workflows/RELEASE.yml)
+
 ### discord-web3-api-sb
-* Version: 1.0.0
+* Version: 1.0.1
 * Most up to date implementation will be found in branch `develop`.
 * Creator: Aaron Renner
 * This API project was created in Spring-Boot
