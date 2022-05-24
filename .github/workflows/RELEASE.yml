@@ -56,7 +56,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/database-sys-api-sb:latest, ${{ secrets.DOCKERHUB_USERNAME }}/database-sys-api-sb:${{ steps.project.outputs.version }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/discord-web3-api-sb:latest, ${{ secrets.DOCKERHUB_USERNAME }}/discord-web3-api-sb:${{ steps.project.outputs.version }}
           labels: |
             com.aaronrenner.bot.version=${{ steps.project.outputs.version }}
 
