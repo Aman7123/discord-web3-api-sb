@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  discord-web3-api-sb:
+    container_name: discord-web3-api-sb-prod
+    image: bananaztech/discord-web3-api-sb:latest
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: URL
+      SPRING_DATASOURCE_USERNAME: USERNAME
+      SPRING_DATASOURCE_PASSWORD: PASSWORD
+    ports:
+      - "8091:8080"
+      - "8007:9000"
+
+networks:
+  default:
+    external:
+      name: frontend
