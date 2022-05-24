@@ -39,7 +39,7 @@ jobs:
         id: project
       # Get project name
       - name: Extract Maven artifactId
-        run: echo ::set-output name=version::$(bash mvnw -q -Dexec.executable=echo -Dexec.args='${project.artifactId}' --non-recursive exec:exec)
+        run: echo ::set-output name=artifactId::$(bash mvnw -q -Dexec.executable=echo -Dexec.args='${project.artifactId}' --non-recursive exec:exec)
         id: artifactId
       #
       # Run Docker stuff
