@@ -42,6 +42,20 @@
 							],
 							"path": [
 								"users"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": null,
+									"description": "Default 100",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": null,
+									"description": "Default 1",
+									"disabled": true
+								}
 							]
 						}
 					},

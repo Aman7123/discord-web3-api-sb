@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.aaronrenner</groupId>
 	<artifactId>discord-web3-api-sb</artifactId>
-	<version>1.0.7</version>
+	<version>1.0.8</version>
 	<name>discord-web3-api-sb</name>
 	<description>An API made with Spring-Boot</description>
 	<properties>
