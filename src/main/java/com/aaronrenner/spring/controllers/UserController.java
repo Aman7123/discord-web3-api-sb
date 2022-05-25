@@ -1,5 +1,6 @@
 package com.aaronrenner.spring.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,14 @@ public class UserController {
 	UserService userService;
 	
 	// Error messages
-	private final String notFoundException = "User with the ID: %s was not found";
+	private final String userNotFoundException = "User with the ID: %s was not found";
 
 	// Endpoints
 	private final String CONTENT_TYPE = "application/json";
 	private final String BASE_PATH    = "/users";
 	private final String WITH_USER_ID = "/{userDiscordId}";
-	private final String WALLET_PATH  = "/wallets/{walletAddress}";
+	private final String WALLET_PATH  = "/wallets";
+	private final String WALLET_ID    = "/{walletAddress}";
 
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@RequestMapping(
@@ -54,7 +56,7 @@ public class UserController {
 	@GetMapping(path = BASE_PATH+WITH_USER_ID, produces = CONTENT_TYPE)
 	public User readUsers(@PathVariable long userDiscordId) {
 		return userService.readUsers(userDiscordId)
-				 .orElseThrow(() -> new ResourceNotFoundException(String.format(notFoundException, userDiscordId)));
+				 .orElseThrow(() -> new ResourceNotFoundException(String.format(userNotFoundException, userDiscordId)));
 	}
 	
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
@@ -70,17 +72,23 @@ public class UserController {
 		userService.deleteUsers(userDiscordId);
 	}
 	
+	@GetMapping(path = BASE_PATH+WITH_USER_ID+WALLET_PATH, produces = CONTENT_TYPE)
+	public List<Wallet> readUsersWallets(@PathVariable long userDiscordId, 
+										 @RequestParam(required = false) String type) {
+		return userService.readUsersWallets(userDiscordId, type);
+	}
+	
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@RequestMapping(
 			method = RequestMethod.POST,
-			value  = BASE_PATH+WITH_USER_ID+WALLET_PATH,
+			value  = BASE_PATH+WITH_USER_ID+WALLET_PATH+WALLET_ID,
 			produces = CONTENT_TYPE)
 	public void createUsersWallets(@PathVariable long userDiscordId, @PathVariable String walletAddress) throws Exception {
 		userService.createUsersWallets(userDiscordId, walletAddress);
 	}
 	
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	@DeleteMapping(path = BASE_PATH+WITH_USER_ID+WALLET_PATH)
+	@DeleteMapping(path = BASE_PATH+WITH_USER_ID+WALLET_PATH+WALLET_ID)
 	public void deleteUsers(@PathVariable long userDiscordId, @PathVariable String walletAddress) {
 		userService.deleteUsersWallets(userDiscordId, walletAddress);
 	}

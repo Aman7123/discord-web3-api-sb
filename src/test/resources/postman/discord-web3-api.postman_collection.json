@@ -291,6 +291,149 @@
 			]
 		},
 		{
+			"name": "/users/{id}/wallets",
+			"item": [
+				{
+					"name": "Create user (new)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const variable1 = pm.variables.replaceIn(\"{{$randomBankAccount}}\");",
+									"const fin       = parseInt(variable1)+10000000;",
+									"pm.environment.set(\"discordId\", fin);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"test#1234\",\n    \"image\": \"{{url}}\",\n    \"discordId\": {{discordId}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user wallets",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/{{discordId}}/wallets",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"{{discordId}}",
+								"wallets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user wallets filtered",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/{{discordId}}/wallets?type=btc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"{{discordId}}",
+								"wallets"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "btc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "/users/{id}/wallets/{id}",
 			"item": [
 				{

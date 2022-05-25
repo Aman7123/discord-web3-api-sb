@@ -10,11 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aaronrenner.spring.exceptions.DuplicateException;
 import com.aaronrenner.spring.exceptions.ResourceNotFoundException;
 import com.aaronrenner.spring.models.User;
+import com.aaronrenner.spring.models.Wallet;
 import com.aaronrenner.spring.repositories.UserPagingRepository;
 import com.aaronrenner.spring.repositories.UserRepository;
 import com.aaronrenner.spring.repositories.WalletRepository;
 import com.aaronrenner.spring.utils.WalletUtils;
 import static java.util.Objects.nonNull;
+import static java.util.Objects.isNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -52,7 +56,7 @@ public class UserService {
 	
 	@Transactional
 	public Optional<User> readUsers(long userDiscordId) {
-		return Optional.of(userRepository.findByDiscordId(userDiscordId));
+		return userRepository.findByDiscordId(userDiscordId);
 	}
 	
 	@Transactional
@@ -73,6 +77,24 @@ public class UserService {
 		checkUserExists(userDiscordId);
 		// Run function
 		userRepository.deleteByDiscordId(userDiscordId);
+	}
+	
+	@Transactional
+	public List<Wallet> readUsersWallets(long userDiscordId, String type) {
+		// Check existence
+		checkUserExists(userDiscordId);
+		// Run function
+		User existingUser = readUsers(userDiscordId).get();
+		// If no filter
+		if(isNull(type)) return existingUser.getWallets();
+		// Else continue
+		List<Wallet> returnData = new ArrayList<>();
+		for(Wallet w : existingUser.getWallets()) {
+			if(w.getType().equalsIgnoreCase(type)) {
+				returnData.add(w);
+			}
+		}
+		return returnData;
 	}
 	
 	@Transactional
